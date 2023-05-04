@@ -20,11 +20,13 @@ realizar busca de usuarios.
 O sistema deve ser implementado com 4 camadas, conforme ilustrado na Figura 1.
 A seguir, sao detalhados requisitos técnicos, considerando cada camada do sistema:
 
-# Front-end : deve ser implementado utilizando a biblioteca de front-end React.js. Toda a
+# Front-end :
+deve ser implementado utilizando a biblioteca de front-end React.js. Toda a
 comunica¢gao com o Back-end deve ser realizada por meio de requisicdes HTTP, carac-
 terizando uma Single-Page Application - SPA;
 
-# Back-end : deve ser implementado utilizando Express.js. A comunicagéo com o Front-end
+# Back-end :
+deve ser implementado utilizando Express.js. A comunicagéo com o Front-end
 deve seguir o padrao de rotas Restful. Esse servidor tera acesso direto ao banco de dados
 apenas para leitura. Os processos de escrita devem ser realizados por meio do servico de
 escrita no banco de dados. Esse servidor também deve implementar um sistema de cache
@@ -32,11 +34,13 @@ de rotas, utilizando o sistema REDIS;
 
 ![image](https://user-images.githubusercontent.com/107415162/236101193-ca93e64d-621f-4d24-8e57-911620616988.png)
 
-# Servico de escrita : deve ser implementado com Node.js, tera acesso direto ao banco de dados,
+# Servico de escrita :
+deve ser implementado com Node.js, tera acesso direto ao banco de dados,
 e a comunicagdo com os outros servicos deve ser realizada por meio de sistema de filas
 de mensagens ou fluxo de eventos;
 
-# Banco de dados: pode ser utilizado qualquer sistema de gerenciamento de banco de dados
+# Banco de dados:
+pode ser utilizado qualquer sistema de gerenciamento de banco de dados
 da escolha dos alunos.
 
 #4) Critérios de avaliacao
