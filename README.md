@@ -7,7 +7,7 @@ uma aplicacao web em 4 camadas: Front-end, Back-end, Servico de Escrita e Banco 
 Os alunos devem implementar individualmente o projeto e a entrega deve ser realizada ate o
 dia 10 de maio de 2023 (quarta-feira).
 
-#2) Requisitos funcionais
+# 2) Requisitos funcionais
 O projeto deve implementar os seguintes requisitos funcionais:
 1. Cadastro de usudrios;
 2. Login de usuarios;
@@ -15,7 +15,7 @@ O projeto deve implementar os seguintes requisitos funcionais:
 Apenas usuarios com sessao ativa no sistema (logados) podem cadastrar novos usuérios e
 realizar busca de usuarios.
 
-#3) Arquitetura do sistema
+# 3) Arquitetura do sistema
 
 O sistema deve ser implementado com 4 camadas, conforme ilustrado na Figura 1.
 A seguir, sao detalhados requisitos técnicos, considerando cada camada do sistema:
@@ -43,7 +43,7 @@ de mensagens ou fluxo de eventos;
 pode ser utilizado qualquer sistema de gerenciamento de banco de dados
 da escolha dos alunos.
 
-#4) Critérios de avaliacao
+# 4) Critérios de avaliacao
 
 Qualquer biblioteca utilizada nao aprovada previamente pelo professor seré desconsiderada
 da avaliacao. Se for constatada cépia de artefatos de outros projetos, sera atribuida nota zero.
@@ -57,4 +57,4 @@ Os critérios de avaliacgado desse projeto sao definidos a seguir:
 * camadas de Front-end e Back-end.
 * Implementagao da estratégia de cache no Back-end.
 * Validacao de sessao/token de autenticagao.
-Implementagao de regras de seguranca para a aplicacao.
+* Implementagao de regras de seguranca para a aplicacao.
