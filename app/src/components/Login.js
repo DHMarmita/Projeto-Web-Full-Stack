@@ -28,7 +28,7 @@ function Login() {
                 }
             );
             setUser(response.data);
-            localStorage.setItem("User", JSON.stringify(response.data.user))
+            localStorage.setItem("User", JSON.stringify(response.data))
             setErrorLogin(false);
             setEmailLogin('');
             setPasswordLogin('');
@@ -88,9 +88,9 @@ function Login() {
                 }
             );
             var resposta = '';
-            for (var i = 0; i < response.data.user.length; i++) {
+            for (var i = 0; i < response.data.length; i++) {
                 resposta = resposta + (
-                    "Nome: " + response.data.user[i]["name"] + "\nEmail: " + response.data.user[i]["email"] + "\n"
+                    "Nome: " + response.data[i]["name"] + "\nEmail: " + response.data[i]["email"] + "\n"
                 );
             };
             setErrorConsulta(resposta);
