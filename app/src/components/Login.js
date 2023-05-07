@@ -28,6 +28,7 @@ function Login() {
                 }
             );
             setUser(response.data);
+            localStorage.setItem("User", JSON.stringify(response.data.user))
             setErrorLogin(false);
             setEmailLogin('');
             setPasswordLogin('');
@@ -73,6 +74,7 @@ function Login() {
     const handleLogout = async (event) => {
         event.preventDefault();
         setUser(null);
+        localStorage.removeItem("User");
     };
 
     const handleConsulta = async (event) => {
@@ -106,7 +108,7 @@ function Login() {
 
     return (
         <div className="login-form-wrap">
-            {user == null ? (
+            {localStorage.getItem("User") == null ? (
                 <div>
                     <h2>Login</h2>
                     <form className="login-form">
