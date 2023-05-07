@@ -13,20 +13,20 @@ export default {
                 return res.status(401).send();
             }
 
-            await Redis.set("name", req.body.nameRegistro);
-            await Redis.set("email", req.body.emailRegistro);
-            await Redis.set("password", req.body.passwordRegistro);
+            const name = req.body.nameRegistro;
+            const email = req.body.emailRegistro;
+            const password = req.body.passwordRegistro;
 
             const salt = bcryptjs.genSaltSync();
 
             const user = {
-                "name": await Redis.get("name"),
-                "email": await Redis.get("email"),
-                "password": bcryptjs.hashSync(await Redis.get("password"), salt)
+                "name": name,
+                "email": email,
+                "password": bcryptjs.hashSync(password, salt)
             };
 
             const exist = await User.findOne({
-                email: await Redis.get("email")
+                "email": email
             });
 
             if (exist) {
@@ -35,7 +35,7 @@ export default {
 
             //Enviar o cadastro de contas para uma fila
             const queue = await Queue.add({ user })
-            return res.status(200).send({ user });
+            return res.status(200).send(user);
         } catch (err) {
             return res.status(402).send();
         }
@@ -44,14 +44,21 @@ export default {
         if (req.body.emailLogin == '' || req.body.passwordLogin == '' || req.body.emailLogin == null || req.body.passwordLogin == null) {
             return res.status(401).send();
         }
-        await Redis.set("email", req.body.emailLogin);
-        await Redis.set("password", req.body.passwordLogin);
+        const email = req.body.emailLogin;
+        const password = req.body.passwordLogin;
+
+        const usersFromCache = await Redis.get("getAllUsers");
+        if (usersFromCache){
+            const userCache = JSON.parse(usersFromCache);
+            return res.status(200).send(userCache.find(perfil => perfil.email == email && bcryptjs.compareSync(password, perfil.password)));
+        }
 
         const user = await User.findOne({
-            email: await Redis.get("email")
+            "email": email
         });
-        if (bcryptjs.compareSync(await Redis.get("password"), user.password)) {
-            return res.status(200).send({ user });
+
+        if (bcryptjs.compareSync(password, user.password)) {
+            return res.status(200).send(user);
         }
         return res.status(402).send();
 
@@ -61,13 +68,25 @@ export default {
             return res.status(401).send();
         }
 
-        await Redis.set("name", req.body.nameConsulta);
+        const name = req.body.nameConsulta;
+
+        const usersFromCache = await Redis.get("getAllUsers");
+        if (usersFromCache){
+            const userCache = JSON.parse(usersFromCache);
+            var arr = [];
+            for(var i=0; i<userCache.length; i++) {
+                if(userCache[i].name === name) {
+                    arr.push(userCache[i]);
+                }
+            }
+            return res.status(200).send(arr);
+        }
 
         const user = await User.find({
-            name: await Redis.get("name")
+            "name": name
         });
         if (user.length > 0) {
-            return res.status(200).send({ user });
+            return res.status(200).send(user);
         }
         return res.status(402).send();
     }
