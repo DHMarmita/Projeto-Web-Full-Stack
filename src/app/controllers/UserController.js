@@ -79,7 +79,10 @@ export default {
                     arr.push(userCache[i]);
                 }
             }
-            return res.status(200).send(arr);
+            if (arr.length > 0) {
+                return res.status(200).send(user);
+            }
+            return res.status(402).send();
         }
 
         const user = await User.find({
